@@ -1,0 +1,22 @@
+{
+  "name": "algorism",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pistis/algorism.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pistis/algorism/issues"
+  },
+  "homepage": "https://github.com/pistis/algorism#readme",
+  "devDependencies": {
+    "mocha": "^2.2.5"
+  }
+}
