@@ -1,6 +1,6 @@
 
 /**
- * 유클리드 알고리즘
+ * 유클리드 알고리즘 (기본 개념)
  * 임의의 두 정수 u, v에 대해
  * 1) v가 u보다 크다면 v와 u의 값을 바꾼다.
  * 2) u = u - v
@@ -22,7 +22,7 @@ exports.getGCD = function getGCD(u, v) {
 }
 
 /**
- * 문제점
+ * 위 getGCD의 문제점
  * - 값의 차이가 클때 뺄셈 연산이 많이 일어나게 된다.
  * - 뺄셈을 하는 이유는 결국 나머지를 구하는 과정이다.
  * 최적화
@@ -36,28 +36,28 @@ exports.getGCD = function getGCD(u, v) {
  * 1) v가 0이 아니면
  *  가) u = u % v
  *  나) u와 v를 교환
- *  다) 1)로 돌아
- * 2) v가 0이면 u가 GCD
- */
+    *  다) 1)로 돌아
+        * 2) v가 0이면 u가 GCD
+        */
 
-exports.getGCDOptimization = function getGCDOptimization (u, v) {
-    var t;
-    while (v) {
-        t = u % v;
-        u = v;
-        v = t;
-    }
+        exports.getGCDOptimization = function getGCDOptimization (u, v) {
+            var t;
+            while (v) {
+                t = u % v;
+                u = v;
+                v = t;
+            }
 
-    return u;
-}
+            return u;
+        }
 
-/**
- * recursive 버전
- */
-exports.getGCDRecursion = function getGCDRecursion(u, v) {
-    if (v == 0) {
-        return u;
-    } else {
+        /**
+         * recursive 버전
+         */
+        exports.getGCDRecursion = function getGCDRecursion(u, v) {
+            if (v == 0) {
+                return u;
+            } else {
         return getGCDRecursion(v, u % v);
     }
 }
