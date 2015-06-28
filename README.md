@@ -3,5 +3,5 @@
 알고리즘 학습하면서 코딩해보기
 
 ## 환경
-*test
-**mocha
+* test
+    * mocha
