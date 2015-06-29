@@ -36,28 +36,27 @@ exports.getGCD = function getGCD(u, v) {
  * 1) v가 0이 아니면
  *  가) u = u % v
  *  나) u와 v를 교환
-    *  다) 1)로 돌아
-        * 2) v가 0이면 u가 GCD
-        */
+ *  다) 1)로 돌아
+ * 2) v가 0이면 u가 GCD
+ */
+exports.getGCDOptimization = function getGCDOptimization (u, v) {
+    var t;
+    while (v) {
+        t = u % v;
+        u = v;
+        v = t;
+    }
 
-        exports.getGCDOptimization = function getGCDOptimization (u, v) {
-            var t;
-            while (v) {
-                t = u % v;
-                u = v;
-                v = t;
-            }
+    return u;
+}
 
-            return u;
-        }
-
-        /**
-         * recursive 버전
-         */
-        exports.getGCDRecursion = function getGCDRecursion(u, v) {
-            if (v == 0) {
-                return u;
-            } else {
+/**
+ * recursive 버전
+ */
+exports.getGCDRecursion = function getGCDRecursion(u, v) {
+    if (v == 0) {
+        return u;
+    } else {
         return getGCDRecursion(v, u % v);
     }
 }
