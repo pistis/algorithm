@@ -16,6 +16,9 @@
     "url": "https://github.com/pistis/algorism/issues"
   },
   "homepage": "https://github.com/pistis/algorism#readme",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  },
   "devDependencies": {
     "mocha": "^2.2.5",
     "should": "^7.0.1"

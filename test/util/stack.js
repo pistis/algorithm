@@ -1,3 +1,4 @@
+var should = require('should');
 var Stack = require('../../src/js/util/stack');
 
 describe('stack', function() {
@@ -45,8 +46,8 @@ describe('stack', function() {
         stack.pop().should.equal(10);
         stack.length().should.equal(1);
         stack.pop().should.equal(1);
-        (stack.peek() === null).should.be.true;
-        (stack.pop() === undefined).should.be.true;
+        should.not.exist(stack.peek());
+        should.not.exist(stack.pop());
         stack.isEmpty().should.equal(true);
     });
 });
