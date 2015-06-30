@@ -1,5 +1,6 @@
 /**
  * List의 Iterator
+ * @see https://github.com/jasonsjones/doubly-linked-list 를 만들어보면서 코딩 연습
  */
 (function() {
     'use strict';
