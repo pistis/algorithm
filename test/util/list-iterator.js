@@ -1,8 +1,7 @@
 var should = require('should');
-var Node = require('../../src/js/util/list-iterator');
 var LinkedList = require('../../src/js/util/doubly-linked-list');
 
-describe('list-node', function() {
+describe('list-iterator', function() {
     var list = null;
 
     var populateList = function (aList, numNodes) {
