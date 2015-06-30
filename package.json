@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/pistis/algorism#readme",
   "devDependencies": {
-    "mocha": "^2.2.5"
+    "mocha": "^2.2.5",
+    "should": "^7.0.1"
   }
 }

@@ -2,6 +2,7 @@ var prime = require('../src/js/prime');
 var assert = require('assert');
 
 /**
+ * 테스트 세트 참고
  * 위키 : https://ko.wikipedia.org/wiki/%EC%86%8C%EC%88%98_(%EC%88%98%EB%A1%A0)
  */
 describe('prime', function() {
@@ -23,7 +24,7 @@ describe('prime', function() {
            assert.equal(false, prime.isPrime(512));
        });
     });
-    describe('#getPrimeNumber()', function() {
+    describe('#getPrimeNumberCount()', function() {
         it('should return integer value', function() {
             assert.equal(172, prime.getPrimeNumberCount(1024));
             assert.equal(46, prime.getPrimeNumberCount(199));
