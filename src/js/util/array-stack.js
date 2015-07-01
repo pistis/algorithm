@@ -5,42 +5,42 @@
 (function() {
     'use strict';
 
-    function Stack() {
+    function ArrayStack() {
         this.data = [null];
         this.top = 0;
     }
 
-    Stack.prototype.clear = function() {
+    ArrayStack.prototype.clear = function() {
         this.data = [null];
         this.top = 0;
         return this;
     };
 
-    Stack.prototype.isEmpty = function() {
+    ArrayStack.prototype.isEmpty = function() {
       return !this.top;
     };
 
-    Stack.prototype.length = function() {
+    ArrayStack.prototype.length = function() {
         return this.top;
     };
 
-    Stack.prototype.peek = function() {
+    ArrayStack.prototype.peek = function() {
         return this.data[this.top];
     };
 
-    Stack.prototype.pop = function() {
+    ArrayStack.prototype.pop = function() {
         if (this.top > 0) {
             this.top--;
             return this.data.pop();
         } else {
-            return undefined;
+            return null;
         }
     };
 
-    Stack.prototype.push = function(arg) {
-        this.data[++this.top] = arg;
+    ArrayStack.prototype.push = function(data) {
+        this.data[++this.top] = data;
         return this;
     };
 
-    module.exports = Stack;
+    module.exports = ArrayStack;
 }());

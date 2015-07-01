@@ -1,11 +1,11 @@
 var should = require('should');
-var Stack = require('../../src/js/util/stack');
+var ArrayStack = require('../../src/js/util/array-stack');
 
-describe('stack', function() {
+describe('array-stack', function() {
     var stack = null;
 
     beforeEach(function() {
-        stack = new Stack();
+        stack = new ArrayStack();
     });
 
     afterEach(function() {
