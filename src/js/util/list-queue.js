@@ -1,5 +1,5 @@
 /**
- * Stack
+ * Queue
  * - doubly linked list 구현
  */
 (function() {
@@ -7,34 +7,34 @@
 
     var LinkedList = require('./doubly-linked-list');
 
-    function ListStack() {
+    function ListQueue() {
         this._list = new LinkedList();
     }
 
-    ListStack.prototype.clear = function() {
+    ListQueue.prototype.clear = function() {
         this._list.clear();
         return this;
     };
 
-    ListStack.prototype.isEmpty = function() {
+    ListQueue.prototype.isEmpty = function() {
       return this._list.isEmpty();
     };
 
-    ListStack.prototype.size = function() {
+    ListQueue.prototype.size = function() {
         return this._list.getSize();
     };
 
-    ListStack.prototype.peek = function() {
+    ListQueue.prototype.peek = function() {
         return !this.isEmpty() ? this._list.getHeadNode().getData() : null;
     };
 
-    ListStack.prototype.pop = function() {
+    ListQueue.prototype.dequeue = function() {
         return !this.isEmpty() ? this._list.removeFirst().getData() : null;
     };
 
-    ListStack.prototype.push = function(data) {
-        return this._list.insertFirst(data);
+    ListQueue.prototype.enqueue = function(data) {
+        return this._list.insert(data);
     };
 
-    module.exports = ListStack;
+    module.exports = ListQueue;
 }());

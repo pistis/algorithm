@@ -16,38 +16,68 @@ describe('list-stack', function() {
         true.should.equal(true);
     });
 
-    it('test clear and isEmpty', function() {
-        stack.isEmpty().should.equal(true);
-        stack.push(true);
-        stack.length().should.equal(1);
-        stack.isEmpty().should.equal(false);
-        stack.clear();
-        stack.length().should.equal(0);
-        stack.isEmpty().should.equal(true);
+    it('should instantiate a stack instance', function () {
+        stack.should.be.ok;
     });
 
-    it('test pop and push and peek and length', function() {
+    it('should be empty when first instantiated', function () {
         stack.isEmpty().should.equal(true);
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-        stack.peek().should.equal(4);
-        stack.pop().should.equal(4);
-        stack.pop().should.equal(3);
-        stack.pop().should.equal(2);
-        stack.push(10);
-        stack.push(20);
-        stack.push(30);
-        stack.length().should.equal(4);
-        stack.peek().should.equal(30);
-        stack.pop().should.equal(30);
-        stack.pop().should.equal(20);
-        stack.pop().should.equal(10);
-        stack.length().should.equal(1);
-        stack.pop().should.equal(1);
-        should.not.exist(stack.peek());
-        should.not.exist(stack.pop());
+        stack.size().should.equal(0);
+    });
+
+    it('should push data onto the stack', function () {
+        stack.push('some test data');
+        stack.push('some more test data');
+        stack.push('and yet some more...');
+        stack.push({
+            "id": 1,
+            "payload": {
+                "number": 42,
+                "desc": "the answer"
+            }
+        });
+        stack.size().should.equal(4);
+    });
+
+    it('should pop data from the top of the stack', function () {
+        stack.push('some test data');
+        stack.push('some more test data');
+        stack.push('and yet some more...');
+        stack.push({
+            "id": 1,
+            "payload": {
+                "number": 42,
+                "desc": "the answer"
+            }
+        });
+        stack.size().should.equal(4);
+        var top = stack.pop();
+        JSON.stringify(top).should.equal(
+            '{"id":1,"payload":{"number":42,"desc":"the answer"}}');
+
+        stack.size().should.equal(3);
+
+        stack.pop().should.equal('and yet some more...');
+        stack.size().should.equal(2);
+    });
+
+    it('should peek at the data on top of the stack', function () {
+        stack.push('some test data');
+        stack.push('some more test data');
+        stack.push('and yet some more...');
+        stack.size().should.equal(3);
+        stack.peek().should.equal('and yet some more...');
+        stack.size().should.equal(3);
+    });
+
+    it('should clear the stack of all data', function () {
+        stack.push('some test data');
+        stack.push('some more test data');
+        stack.push('and yet some more...');
+        stack.push('and how about some more...');
+        stack.size().should.equal(4);
+        stack.clear();
+        stack.size().should.equal(0);
         stack.isEmpty().should.equal(true);
     });
 });
