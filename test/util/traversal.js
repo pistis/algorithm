@@ -38,6 +38,16 @@ describe('traversal', function() {
         result.should.equal('1245367');
     });
 
+    it('should tree traversal by preorder(non recursive)', function () {
+        var result = '';
+        var traversal = new Traversal().setVisit(function(data){
+            result += data;
+        });
+
+        traversal.preOrderNonRecursive(tree);
+        result.should.equal('1245367');
+    });
+
     it('should tree traversal by inorder', function () {
         var result = '';
         var traversal = new Traversal().setVisit(function(data){
@@ -56,6 +66,16 @@ describe('traversal', function() {
 
         traversal.postOrder(tree);
         result.should.equal('4526731');
+    });
+
+    it('should tree traversal by levelorder', function () {
+        var result = '';
+        var traversal = new Traversal().setVisit(function(data){
+            result += data;
+        });
+
+        traversal.levelOrder(tree);
+        result.should.equal('1234567');
     });
 
 });
