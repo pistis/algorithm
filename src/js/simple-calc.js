@@ -10,6 +10,7 @@
 (function(){
     'use strict'
 
+    var Node = require('./util/binary-tree-node');
     var Stack = require('./util/list-stack');
     var OPERATOR = {
         PARENTHESIS_START_SYMBOL : '(',
@@ -158,6 +159,40 @@
             return leftOperand / rightOperand;
         }
         throw 'invalid operator';
+    };
+
+    /**
+     * 1. operand 는 node를 만들어 stack에 push
+     * 2. operator는 node를 만들어
+     *  - stack에서 pop한 노드를 right
+     *  - stack에서 pop한 노드를 left
+     *  - operator node를 stack에 push
+     * 3. stack에 마지막으로 남은 노드가 root
+     * @param postfix
+     * @returns {*}
+     */
+    SimpleCalc.prototype.buildTreeByPostfix = function(postfix) {
+        // 3 1 2 + +
+        var postfixArr = postfix.split(' '),
+            data,
+            node,
+            i = 0;
+        this._stack.clear();
+
+        while(postfixArr[i]) {
+            data = postfixArr[i];
+            if(this.isOperator(data)) {
+                node = new Node(data);
+                node.right = this._stack.pop();
+                node.left = this._stack.pop();
+                this._stack.push(node);
+            } else if(this.isOperand(data)) {
+                node = new Node(data);
+                this._stack.push(node);
+            }
+            i++;
+        }
+        return this._stack.pop();
     };
 
     module.exports = SimpleCalc;

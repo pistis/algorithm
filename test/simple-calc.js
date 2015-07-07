@@ -1,5 +1,6 @@
 var should = require('should');
 var SimpleCalc = require('../src/js/simple-calc');
+var Traversal = require('../src/js/util/traversal');
 
 describe('simple-calc', function(){
     var calc = null;
@@ -46,5 +47,23 @@ describe('simple-calc', function(){
         calc.calcInfix('(2*(3+6/2)+2)/4+3').should.equal(6.5);
         calc.calcInfix('(2 * (3 + 6 / 2) + 2) / 4 + 3').should.equal(6.5);
         calc.calcInfix('( 2 * ( 3 + 6 / 2 ) + 2 ) / 4 + 3').should.equal(6.5);
+    });
+
+    it('should transform to infix from postfix by parsetree', function() {
+        var result = '';
+        var traversal = new Traversal().setVisit(function(data){
+            result += data + ' ';
+        });
+
+        traversal.inOrder(calc.buildTreeByPostfix('3 1 2 + +'));
+        result.trim().should.equal('3 + 1 + 2');
+
+        result = '';
+        traversal.inOrder(calc.buildTreeByPostfix('12 34 56 * +'));
+        result.trim().should.equal('12 + 34 * 56');
+
+        result = '';
+        traversal.inOrder(calc.buildTreeByPostfix('2 3 6 2 / + * 2 + 4 / 3 +'));
+        result.trim().should.equal('2 * 3 + 6 / 2 + 2 / 4 + 3');
     });
 });
