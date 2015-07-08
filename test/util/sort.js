@@ -23,7 +23,7 @@ describe('sort', function() {
         var testArr = [];
 
         testArr = _.shuffle(arrAscend);
-        testArr = Sort.sortBySelection(testArr);
+        testArr = Sort.selection(testArr);
         testArr.should.eql(arrAscend);
     });
 
@@ -34,7 +34,7 @@ describe('sort', function() {
         }
 
         testArr = _.shuffle(arrDescend);
-        testArr = Sort.sortBySelection(testArr, compare);
+        testArr = Sort.selection(testArr, compare);
         testArr.should.eql(arrDescend);
     });
 
@@ -42,7 +42,7 @@ describe('sort', function() {
         var testArr = [];
 
         testArr = _.shuffle(arrAscend);
-        testArr = Sort.sortByInsertion(testArr);
+        testArr = Sort.insertion(testArr);
         testArr.should.eql(arrAscend);
     });
 
@@ -53,7 +53,7 @@ describe('sort', function() {
         }
 
         testArr = _.shuffle(arrDescend);
-        testArr = Sort.sortByInsertion(testArr, compare);
+        testArr = Sort.insertion(testArr, compare);
         testArr.should.eql(arrDescend);
     });
 });

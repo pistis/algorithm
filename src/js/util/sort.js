@@ -11,7 +11,7 @@
  * @param compare
  * @returns {*}
  */
-exports.sortBySelection = function sortBySelection(arr, compare) {
+exports.selection = function selection(arr, compare) {
     'use strict';
     var i,
         j,
@@ -52,7 +52,7 @@ exports.sortBySelection = function sortBySelection(arr, compare) {
  * @param compare
  * @returns {*}
  */
-exports.sortByInsertion = function sortByInsertion(arr, compare) {
+exports.insertion = function insertion(arr, compare) {
     var i,
         j,
         tmp,
