@@ -5,6 +5,12 @@ function compareAscending(a, b) {
 /**
  * selection sort
  *  - Selection sort with O(n^2) time complexity
+ *  - worst case
+ *  -- 비교 : N * (N - 1) / 2, 교환 : N - 1
+ *  - best case
+ *  -- 비교 : N * (N - 1) / 2, 교환 : O
+ *  - complexity : O(N^2)
+ *  - 특징 : 입력자료에 둔감하다 (교환 횟수가 적어 큰 레코드에 적합하다.)
  * @param arr
  */
 exports.sortBySelection = function sortBySelection(arr, compare) {
