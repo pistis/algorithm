@@ -38,4 +38,22 @@ describe('sort', function() {
         testArr.should.eql(arrDescend);
     });
 
+    it('should insertionsort with ascending.', function () {
+        var testArr = [];
+
+        testArr = _.shuffle(arrAscend);
+        testArr = Sort.sortByInsertion(testArr);
+        testArr.should.eql(arrAscend);
+    });
+
+    it('should insertionsort with comparator', function () {
+        var testArr = [];
+        var compare = function(a, b) {
+            return b - a;
+        }
+
+        testArr = _.shuffle(arrDescend);
+        testArr = Sort.sortByInsertion(testArr, compare);
+        testArr.should.eql(arrDescend);
+    });
 });
