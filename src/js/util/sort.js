@@ -71,4 +71,77 @@ exports.insertion = function insertion(arr, compare) {
         arr[j] = tmp;
     }
     return arr;
-}
+};
+
+/**
+ * bubble sort
+ * - Bubble sort with O(n^2) time complexity
+ * - worst case : Reverse
+ * -- 비교 : N * (N - 1) / 2, 교환 : N * (N - 1) / 2
+ * - best case : Sorted
+ *  -- 비교 : N * (N - 1) / 2, 교환 : O
+ * @param arr
+ * @param compare
+ * @returns {*}
+ */
+exports.bubble = function bubble(arr, compare) {
+    var i,
+        j,
+        tmp,
+        len = arr.length;
+    compare = compare || function(a, b) {
+        return a - b;
+    };
+
+    for (i = 0; i < len - 1; i++) {
+        for (j = 0; j < len - 1 - i; j++) {
+            if (compare(arr[j], arr[j + 1]) > 0) {
+                tmp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = tmp;
+            }
+        }
+    }
+
+    return arr;
+};
+
+/**
+ * bubble sort (개선 버전)
+ * - Bubble sort with O(n^2) time complexity
+ * - worst case : Reverse
+ * -- 비교 : N * (N - 1) / 2, 교환 : N * (N - 1) / 2
+ * - best case : Sorted
+ *  -- 비교 : N * (N - 1) / 2, 교환 : O
+ * * bSorted flag를 이용하여 중간에라도 정렬이 되었다면 비교를 하지 않고 정렬을 종료하여 속도를 개선한다.
+ * @param arr
+ * @param compare
+ * @returns {*}
+ */
+exports.bubble2 = function bubble(arr, compare) {
+    var i,
+        j,
+        tmp,
+        len = arr.length,
+        bSorted = false;
+    compare = compare || function(a, b) {
+            return a - b;
+        };
+
+    for (i = 0; i < len - 1; i++) {
+        bSorted = true;
+        for (j = 0; j < len - 1 - i; j++) {
+            if (compare(arr[j], arr[j + 1]) > 0) {
+                tmp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = tmp;
+                bSorted = false;
+            }
+        }
+        if (bSorted) {
+            break;
+        }
+    }
+
+    return arr;
+};
