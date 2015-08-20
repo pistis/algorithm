@@ -86,10 +86,44 @@ describe('sort', function() {
         var testArr = [];
         var compare = function(a, b) {
             return b - a;
-        }
+        };
 
         testArr = _.shuffle(arrDescend);
         testArr = Sort.bubble2(testArr, compare);
+        testArr.should.eql(arrDescend);
+    });
+
+    it('should quicksort with ascending.', function () {
+        var testArr = [];
+        testArr = _.shuffle(arrAscend);
+        testArr = Sort.quick(testArr);
+        testArr.should.eql(arrAscend);
+    });
+
+    it('should quicksort(none recursive version) with ascending.', function () {
+        var testArr = [];
+        testArr = _.shuffle(arrAscend);
+        testArr = Sort.quickNR(testArr);
+        testArr.should.eql(arrAscend);
+    });
+
+    it('should quicksort with comparator.', function () {
+        var testArr = [];
+        var compare = function(a, b) {
+            return b - a;
+        };
+        testArr = _.shuffle(arrDescend);
+        testArr = Sort.quick(testArr, compare);
+        testArr.should.eql(arrDescend);
+    });
+
+    it('should quicksort(none recursive version) with comparator.', function () {
+        var testArr = [];
+        var compare = function(a, b) {
+            return b - a;
+        };
+        testArr = _.shuffle(arrDescend);
+        testArr = Sort.quickNR(testArr, compare);
         testArr.should.eql(arrDescend);
     });
 });

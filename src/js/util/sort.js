@@ -145,3 +145,109 @@ exports.bubble2 = function bubble(arr, compare) {
 
     return arr;
 };
+
+/**
+ * Quick sort (recursive version)
+ * 알고리즘
+ * 1. 분할 알고리즘
+ * - 왼쪽은 pivot 값보다 작은 값으로 오른쪽은 pivot 값보다 큰 값으로 배열한다.
+ * 2. Quick Sort 알고리즘
+ * - 크기가 1보다 클동안 partition을 재귀적으로 반복한다.
+ * * 최적화
+ * - 별도의 메모리없이 내부 분할로 구현한다.
+ * @param arr
+ * @param compare
+ * @returns {*}
+ */
+exports.quick = function quick(arr, compare) {
+    compare = compare || function(a, b) {
+            return a - b;
+        };
+    return qsort(arr, 0, arr.length - 1, compare);
+};
+
+function qsort(arr, left, right, compare) {
+    var i, j, t, p;
+
+    if((right - left) + 1 > 1) {
+        p = arr[right];
+        i = left - 1;
+        j = right;
+
+        while(true) {
+            while(compare(p, arr[++i]) > 0);
+            while(compare(arr[--j], p) > 0);
+            if (i >= j) break;
+            t = arr[j];
+            arr[j] = arr[i];
+            arr[i] = t;
+        }
+
+        arr[right] = arr[i];
+        arr[i] = p;
+        qsort(arr, left, i - 1, compare);
+        qsort(arr, i + 1, right, compare);
+    }
+
+    return arr;
+};
+
+/**
+ * Quick sort (none recursive version)
+ * 알고리즘
+ * 1. 분할 알고리즘
+ * - 왼쪽은 pivot 값보다 작은 값으로 오른쪽은 pivot 값보다 큰 값으로 배열한다.
+ * 2. Quick Sort 알고리즘
+ * - 크기가 1보다 클동안 partition을 반복한다.
+ * * 최적화
+ * - 별도의 메모리없이 내부 분할로 구현한다.
+ * - none recursive를 stack을 이용하여 구현한다.
+ * @param arr
+ * @param compare
+ * @returns {*}
+ */
+exports.quickNR = function quick(arr, compare) {
+    compare = compare || function(a, b) {
+            return a - b;
+        };
+    return qsortNR(arr, 0, arr.length - 1, compare);
+};
+
+function qsortNR(arr, left, right, compare) {
+    var Stack = require('./array-stack');
+    var stack = new Stack();
+    var i, j, t, p;
+    stack.push(right);
+    stack.push(left);
+
+    while(!stack.isEmpty()) {
+        left = stack.pop();
+        right = stack.pop();
+        if((right - left) + 1 > 1) {
+            p = arr[right];
+            i = left - 1;
+            j = right;
+
+            while(true) {
+                while(compare(p, arr[++i]) > 0);
+                while(compare(arr[--j], p) > 0);
+                //while(arr[++i] < p);
+                //while(arr[--j] > p);
+                if (i >= j) break;
+                t = arr[j];
+                arr[j] = arr[i];
+                arr[i] = t;
+            }
+            t = arr[right];
+            arr[right] = arr[i];
+            arr[i] = t;
+
+            stack.push(right);
+            stack.push(i + 1);
+            stack.push(i - 1);
+            stack.push(left);
+        }
+    }
+
+    return arr;
+};
