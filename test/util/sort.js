@@ -57,6 +57,25 @@ describe('sort', function() {
         testArr.should.eql(arrDescend);
     });
 
+    it('should insertionsort 2 with ascending.', function () {
+        var testArr = [];
+
+        testArr = _.shuffle(arrAscend);
+        testArr = Sort.insertion(testArr, 0, testArr.length);
+        testArr.should.eql(arrAscend);
+    });
+
+    it('should insertionsort 2 with comparator', function () {
+        var testArr = [];
+        var compare = function(a, b) {
+            return b - a;
+        }
+
+        testArr = _.shuffle(arrDescend);
+        testArr = Sort.insertion(testArr, 0, testArr.length, compare);
+        testArr.should.eql(arrDescend);
+    });
+
     it('should bubblesort with ascending.', function () {
         var testArr = [];
         testArr = _.shuffle(arrAscend);
@@ -107,6 +126,27 @@ describe('sort', function() {
         testArr.should.eql(arrAscend);
     });
 
+    it('should quicksort(none recursive version, use random pivot) with ascending.', function () {
+        var testArr = [];
+        testArr = _.shuffle(arrAscend);
+        testArr = Sort.quickNRRandom(testArr);
+        testArr.should.eql(arrAscend);
+    });
+
+    it('should quicksort(none recursive version, use median of three pivot) with ascending.', function () {
+        var testArr = [];
+        testArr = _.shuffle(arrAscend);
+        testArr = Sort.quickNRMedianOfThree(testArr);
+        testArr.should.eql(arrAscend);
+    });
+
+    it('should quicksort(none recursive version, use subfile(median of three && insertion sort) with ascending.', function () {
+        var testArr = [];
+        testArr = _.shuffle(arrAscend);
+        testArr = Sort.quickSubfile(testArr);
+        testArr.should.eql(arrAscend);
+    });
+
     it('should quicksort with comparator.', function () {
         var testArr = [];
         var compare = function(a, b) {
@@ -124,6 +164,26 @@ describe('sort', function() {
         };
         testArr = _.shuffle(arrDescend);
         testArr = Sort.quickNR(testArr, compare);
+        testArr.should.eql(arrDescend);
+    });
+
+    it('should quicksort(none recursive version, use random pivot) with comparator.', function () {
+        var testArr = [];
+        var compare = function(a, b) {
+            return b - a;
+        };
+        testArr = _.shuffle(arrDescend);
+        testArr = Sort.quickNRRandom(testArr, compare);
+        testArr.should.eql(arrDescend);
+    });
+
+    it('should quicksort(none recursive version, use median of three pivot) with comparator.', function () {
+        var testArr = [];
+        var compare = function(a, b) {
+            return b - a;
+        };
+        testArr = _.shuffle(arrDescend);
+        testArr = Sort.quickNRMedianOfThree(testArr, compare);
         testArr.should.eql(arrDescend);
     });
 });

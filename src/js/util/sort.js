@@ -1,5 +1,5 @@
 /**
- * selection sort
+ * selectin sort
  *  - Selection sort with O(n^2) time complexity
  *  - worst case
  *  -- 비교 : N * (N - 1) / 2, 교환 : N - 1
@@ -72,6 +72,35 @@ exports.insertion = function insertion(arr, compare) {
     }
     return arr;
 };
+
+/**
+ * insertion sort 2
+ *  - 알고리즘은 insertion sort와 동일
+ *  - 특징 : 시작 index와 길이를 받아서 배열의 특정 구간을 정렬하도록 한다.
+ * @param arr
+ * @param compare
+ * @returns {*}
+ */
+function insertion2(arr, start, len, compare) {
+    var i,
+        j,
+        tmp;
+    compare = compare || function(a, b) {
+            return a - b;
+        };
+
+    for(i = start; i < len; i++) {
+        tmp = arr[i];
+        j = i;
+        while(j > 0 && compare(arr[j - 1], tmp) > 0) {
+            arr[j] = arr[j - 1];
+            j--;
+        }
+        arr[j] = tmp;
+    }
+    return arr;
+};
+exports.insertion2 = insertion2;
 
 /**
  * bubble sort
@@ -153,6 +182,7 @@ exports.bubble2 = function bubble(arr, compare) {
  * - 왼쪽은 pivot 값보다 작은 값으로 오른쪽은 pivot 값보다 큰 값으로 배열한다.
  * 2. Quick Sort 알고리즘
  * - 크기가 1보다 클동안 partition을 재귀적으로 반복한다.
+ * - pivot 값은 배열의 제일 끝 값으로 한다.
  * * 최적화
  * - 별도의 메모리없이 내부 분할로 구현한다.
  * @param arr
@@ -193,12 +223,13 @@ function qsort(arr, left, right, compare) {
 };
 
 /**
- * Quick sort (none recursive version)
+ * Quick sort (none recursive version - use array stack)
  * 알고리즘
  * 1. 분할 알고리즘
  * - 왼쪽은 pivot 값보다 작은 값으로 오른쪽은 pivot 값보다 큰 값으로 배열한다.
  * 2. Quick Sort 알고리즘
  * - 크기가 1보다 클동안 partition을 반복한다.
+ * - pivot 값은 배열의 제일 끝 값으로 한다.
  * * 최적화
  * - 별도의 메모리없이 내부 분할로 구현한다.
  * - none recursive를 stack을 이용하여 구현한다.
@@ -206,7 +237,7 @@ function qsort(arr, left, right, compare) {
  * @param compare
  * @returns {*}
  */
-exports.quickNR = function quick(arr, compare) {
+exports.quickNR = function quickNR(arr, compare) {
     compare = compare || function(a, b) {
             return a - b;
         };
@@ -231,8 +262,6 @@ function qsortNR(arr, left, right, compare) {
             while(true) {
                 while(compare(p, arr[++i]) > 0);
                 while(compare(arr[--j], p) > 0);
-                //while(arr[++i] < p);
-                //while(arr[--j] > p);
                 if (i >= j) break;
                 t = arr[j];
                 arr[j] = arr[i];
@@ -251,3 +280,233 @@ function qsortNR(arr, left, right, compare) {
 
     return arr;
 };
+
+/**
+ * Quick sort (none recursive version - use array stack, random pivot)
+ * 알고리즘
+ * 1. 분할 알고리즘
+ * - 왼쪽은 pivot 값보다 작은 값으로 오른쪽은 pivot 값보다 큰 값으로 배열한다.
+ * 2. Quick Sort 알고리즘
+ * - 크기가 1보다 클동안 partition을 반복한다.
+ * * 최적화
+ * - 별도의 메모리없이 내부 분할로 구현한다.
+ * - none recursive를 stack을 이용하여 구현한다.
+ * - pivot값은 난수를 이용하여 랜덤으로 구해 성능을 개선한다.
+ * @param arr
+ * @param compare
+ * @returns {*}
+ */
+exports.quickNRRandom = function quickNRRandom(arr, compare) {
+    compare = compare || function(a, b) {
+            return a - b;
+        };
+    return qsortNRRandom(arr, 0, arr.length - 1, compare);
+};
+
+function qsortNRRandom(arr, left, right, compare) {
+    var Stack = require('./array-stack');
+    var stack = new Stack();
+    var i, j, t, p, pIdx;
+    stack.push(right);
+    stack.push(left);
+
+    while(!stack.isEmpty()) {
+        left = stack.pop();
+        right = stack.pop();
+        if((right - left) + 1 > 1) {
+
+            pIdx = Math.floor((Math.random() * (right - left + 1)) + left);
+            p = arr[pIdx];
+            arr[pIdx] = arr[right];
+            arr[right] = p;
+            i = left - 1;
+            j = right;
+
+            while(true) {
+                while(compare(p, arr[++i]) > 0);
+                while(compare(arr[--j], p) > 0);
+                if (i >= j) break;
+                t = arr[j];
+                arr[j] = arr[i];
+                arr[i] = t;
+            }
+            t = arr[right];
+            arr[right] = arr[i];
+            arr[i] = t;
+
+            stack.push(right);
+            stack.push(i + 1);
+            stack.push(i - 1);
+            stack.push(left);
+        }
+    }
+
+    return arr;
+};
+
+/**
+ * Quick sort (none recursive version - use array stack, median of three pivot)
+ * 알고리즘
+ * 1. 분할 알고리즘
+ * - 왼쪽은 pivot 값보다 작은 값으로 오른쪽은 pivot 값보다 큰 값으로 배열한다.
+ * 2. Quick Sort 알고리즘
+ * - 크기가 1보다 클동안 partition을 반복한다.
+ * * 최적화
+ * - 별도의 메모리없이 내부 분할로 구현한다.
+ * - none recursive를 stack을 이용하여 구현한다.
+ * - pivot값은 첫번째, 중앙, 끝 값 중 중간 값으로 구한다.
+ * - 크기가 3이하인 배열은 bubble sort한다.
+ * @param arr
+ * @param compare
+ * @returns {*}
+ */
+exports.quickNRMedianOfThree = function quickNRMedianOfThree(arr, compare) {
+    compare = compare || function(a, b) {
+            return a - b;
+        };
+    return qsortNRMedianOfThree(arr, 0, arr.length - 1, compare);
+};
+
+function qsortNRMedianOfThree(arr, left, right, compare) {
+    var Stack = require('./array-stack');
+    var stack = new Stack();
+    var i, j, t, p, pIdx;
+    // 3개의 값 정렬
+    var fnSort = function(arr, left, pivot, right, compare) {
+        var v;
+        if (compare(arr[left], arr[pivot]) > 0) {
+            v = arr[left];
+            arr[left] = arr[pivot];
+            arr[pivot] = v;
+        }
+        if (compare(arr[pivot], arr[right]) > 0) {
+            v = arr[pivot];
+            arr[pivot] = arr[right];
+            arr[right] = v;
+        }
+        if (compare(arr[left], arr[pivot]) > 0) {
+            v = arr[left];
+            arr[left] = arr[pivot];
+            arr[pivot] = v;
+        }
+    }
+    stack.push(right);
+    stack.push(left);
+
+    while(!stack.isEmpty()) {
+        left = stack.pop();
+        right = stack.pop();
+        if((right - left) + 1 > 3) {
+            pIdx = Math.floor((right + left) / 2);
+            fnSort(arr, left, pIdx, right, compare);
+            p = arr[pIdx];
+            arr[pIdx] = arr[right - 1];
+            arr[right - 1] = p;
+
+            i = left;
+            j = right - 1;
+
+            while(true) {
+                while(compare(p, arr[++i]) > 0);
+                while(compare(arr[--j], p) > 0);
+                if (i >= j) break;
+                t = arr[j];
+                arr[j] = arr[i];
+                arr[i] = t;
+            }
+            t = arr[right - 1];
+            arr[right - 1] = arr[i];
+            arr[i] = t;
+
+            stack.push(right);
+            stack.push(i + 1);
+            stack.push(i - 1);
+            stack.push(left);
+        } else {
+            pIdx = Math.floor((right + left) / 2);
+            fnSort(arr, left, pIdx, right, compare);
+        }
+    }
+
+    return arr;
+};
+
+/**
+ * Quick sort (최종 개선)
+ * 알고리즘
+ * - 크기가 일정 크기 이하(200 개체 이)는 insertion sort, 이상(200 개체 초과)은 median of three sort한다.
+ * @param arr
+ * @param compare
+ * @returns {*}
+ */
+exports.quickSubfile = function quickSubfile(arr, compare) {
+    compare = compare || function(a, b) {
+            return a - b;
+        };
+    return qsortSubfile(arr, 0, arr.length - 1, compare);
+};
+
+function qsortSubfile(arr, left, right, compare) {
+    var Stack = require('./array-stack');
+    var stack = new Stack();
+    var i, j, t, p, pIdx;
+    // 3개의 값 정렬
+    var fnSort = function(arr, left, pivot, right, compare) {
+        var v;
+        if (compare(arr[left], arr[pivot]) > 0) {
+            v = arr[left];
+            arr[left] = arr[pivot];
+            arr[pivot] = v;
+        }
+        if (compare(arr[pivot], arr[right]) > 0) {
+            v = arr[pivot];
+            arr[pivot] = arr[right];
+            arr[right] = v;
+        }
+        if (compare(arr[left], arr[pivot]) > 0) {
+            v = arr[left];
+            arr[left] = arr[pivot];
+            arr[pivot] = v;
+        }
+    }
+    stack.push(right);
+    stack.push(left);
+
+    while(!stack.isEmpty()) {
+        left = stack.pop();
+        right = stack.pop();
+        if((right - left) + 1 > 50) {
+            pIdx = Math.floor((right + left) / 2);
+            fnSort(arr, left, pIdx, right, compare);
+            p = arr[pIdx];
+            arr[pIdx] = arr[right - 1];
+            arr[right - 1] = p;
+
+            i = left;
+            j = right - 1;
+
+            while(true) {
+                while(compare(p, arr[++i]) > 0);
+                while(compare(arr[--j], p) > 0);
+                if (i >= j) break;
+                t = arr[j];
+                arr[j] = arr[i];
+                arr[i] = t;
+            }
+            t = arr[right - 1];
+            arr[right - 1] = arr[i];
+            arr[i] = t;
+
+            stack.push(right);
+            stack.push(i + 1);
+            stack.push(i - 1);
+            stack.push(left);
+        } else {
+            insertion2(arr, left, right + 1, compare);
+        }
+    }
+
+    return arr;
+};
+
+
