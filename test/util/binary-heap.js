@@ -1,0 +1,51 @@
+var should = require('should');
+var BinaryHeap = require('../../src/js/util/binary-heap');
+
+describe('binary-heap', function() {
+
+    beforeEach(function() {
+    });
+
+    afterEach(function() {
+    });
+
+    it('should have a working test environment', function() {
+        true.should.equal(true);
+    });
+
+    it('test insert.', function() {
+        var heap = new BinaryHeap();
+        heap.getLength().should.equal(0);
+        heap.insert(5);
+        heap.insert(2);
+        heap.insert(7);
+        heap.insert(9);
+        heap.getLength().should.equal(4);
+        heap.peek().should.equal(9);
+        heap.insert(11);
+        heap.peek().should.equal(11);
+        heap.insert(3);
+        heap.insert(20);
+        heap.peek().should.equal(20);
+        heap.insert(4);
+        heap.insert(9);
+        heap.getLength().should.equal(9);
+    });
+
+    it('test extract.', function() {
+        var arr = [5, 2, 7, 9, 11, 3, 20, 4, 9];
+        var heap = new BinaryHeap();
+        var len = arr.length;
+        for (var i = 0; i < len; i++) {
+            heap.insert(arr[i]);
+        }
+        heap.getLength().should.equal(9);
+        heap.peek().should.equal(20);
+
+        var result = new Array(len);
+        for (var i = 0; i < len; i++) {
+            result[i] = heap.extract();
+        }
+        result.should.eql([20, 11, 9, 9, 7, 5, 4, 3, 2]);
+    });
+});
