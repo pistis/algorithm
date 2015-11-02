@@ -205,4 +205,23 @@ describe('sort', function() {
         testArr = Sort.heap(testArr, compare);
         testArr.should.eql(arrDescend);
     });
+
+    it('should improve heapsort with ascending.', function () {
+        var testArr = [];
+
+        testArr = _.shuffle(arrAscend);
+        testArr = Sort.heap2(testArr);
+        testArr.should.eql(arrAscend);
+    });
+
+    it('should improve heapsort with comparator', function () {
+        var testArr = [];
+        var compare = function(a, b) {
+            return b - a;
+        }
+
+        testArr = _.shuffle(arrDescend);
+        testArr = Sort.heap2(testArr, compare);
+        testArr.should.eql(arrDescend);
+    });
 });

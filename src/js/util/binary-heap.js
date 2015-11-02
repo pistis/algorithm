@@ -72,6 +72,10 @@
         return this.heapLen;
     };
 
+    BinaryHeap.prototype.setLength = function(length) {
+        this.heapLen = length;
+    };
+
     BinaryHeap.prototype.getData = function() {
         return this.data;
     };
