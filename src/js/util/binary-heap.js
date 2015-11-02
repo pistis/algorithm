@@ -1,10 +1,19 @@
 /**
  * Heap
+ * 정의
+ * - 자료의 크기를 우선순위로 하는 우선순위 큐
+ * - 정렬에서만 쓰는 것이 아닌, 다양한 활용이 가능하다.
+ * - Full Binary Tree 로서 부모는 두 자식보다 큰 값
+ * - heap sort는
+ *  -- heap creation -> heap extraction 과정이다.
+ *  -- top-down creation vs bottom-up creation
+ *  -- O(NlogN)의 성능을 가지며, 부가메모리가 필요없다.
+ * algorithm
  * - array로 구현(Full binary tree)
  * -- Tree를 배열로 표현하는 방법
  * 1. level order traversal을 이용한다.
  * 2. 노드의 번호가 배열의 인덱스이다.(1부터 시작)
- * 3. Full binary tree를 표현하는데에 매우 효율적이다.
+ * 3. Full binary tree로 표현하는데에 매우 효율적이다.
  * 4. Child/Parent의 관계
  *  가. j노드의 부모노드는 j/2이다.
  *  나. j노드의 왼쪽 자식은 j*2이고, 오른쪽 자식은 j*2 + 1이다.
