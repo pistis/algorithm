@@ -42,10 +42,30 @@ describe('binary-heap', function() {
         heap.getLength().should.equal(9);
         heap.peek().should.equal(20);
 
-        var result = new Array(len);
-        for (var i = 0; i < len; i++) {
-            result[i] = heap.extract();
+        heap.extract().should.equal(20);
+        heap.extract().should.equal(11);
+        heap.extract().should.equal(9);
+        heap.extract().should.equal(9);
+        heap.extract().should.equal(7);
+        heap.extract().should.equal(5);
+        heap.extract().should.equal(4);
+        heap.extract().should.equal(3);
+        heap.extract().should.equal(2);
+    });
+
+    it('test sort', function() {
+        var arr = [5, 2, 7, 9, 11, 3, 20, 4, 9];
+        var heap = new BinaryHeap(arr);
+        var len = arr.length;
+        for (var i = 1; i <= len; i++) {
+            heap.insert(heap.get(i));
         }
-        result.should.eql([20, 11, 9, 9, 7, 5, 4, 3, 2]);
+
+        while (len > 1) {
+            heap.set(len--, heap.extract());
+        }
+
+        arr.should.eql([2, 3, 4, 5, 7, 9, 9, 11, 20]);
+        heap.getData().should.eql([2, 3, 4, 5, 7, 9, 9, 11, 20]);
     });
 });

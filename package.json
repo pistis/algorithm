@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/pistis/algorism#readme",
   "dependencies": {
+    "cli-table": "^0.3.1",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

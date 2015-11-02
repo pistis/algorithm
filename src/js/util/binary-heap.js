@@ -13,9 +13,12 @@
 (function() {
     'use strict';
 
-    function BinaryHeap(data, len) {
+    function BinaryHeap(data, compare) {
         this.data = data || [];
-        this.heapLen = this.data.length;
+        this.heapLen = 0;
+        this.compare = compare || function(a, b) {
+                return a - b;
+            };
     }
 
     BinaryHeap.prototype.get = function(idx) {
@@ -33,7 +36,8 @@
 
     BinaryHeap.prototype.upHeap = function(idx) {
         var value = this.get(idx);
-        while (this.get(parseInt(idx/2)) <= value && idx > 1) {
+        //if(compare(arr[minIdx], arr[j]) > 0) {
+        while (this.compare(value, this.get(parseInt(idx/2))) >= 0 && idx > 1) {
             this.set(idx, this.get(parseInt(idx/2)));
             idx = parseInt(idx/2);
         }
@@ -52,8 +56,8 @@
         var i;
         while (idx <= this.heapLen / 2) {    // 내부노드일때에만
             i = idx * 2;
-            if (i < this.heapLen && this.get(i+1) > this.get(i)) i++;
-            if (value >= this.get(i) || value == this.get(i)) break;
+            if (i < this.heapLen && this.compare(this.get(i+1), this.get(i)) > 0) i++;
+            if (this.compare(value, this.get(i)) >= 0 || value == this.get(i)) break;
             this.set(idx, this.get(i));
             idx = i;
         }
@@ -69,7 +73,7 @@
     };
 
     BinaryHeap.prototype.getData = function() {
-        return this.heapLen;
+        return this.data;
     };
 
     module.exports = BinaryHeap;

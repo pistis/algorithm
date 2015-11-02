@@ -12,7 +12,6 @@
  * @returns {*}
  */
 exports.selection = function selection(arr, compare) {
-    'use strict';
     var i,
         j,
         minIdx = 0,
@@ -175,8 +174,37 @@ exports.bubble2 = function bubble(arr, compare) {
     return arr;
 };
 
+
+var BinaryHeap = require('./binary-heap');
+/**
+ * heap sort
+ * insert, extract, down heap, up heap은 O(logN)의 성능을 가진다.
+ *  - Full Binary Tree :  노드가 N개이면 트리의 높이는 logN+1
+ * heap sort는 O(NlogN)의 성능을 가진다.
+ *  - 힙생성 : N개의 자료를 insert하므로 O(NlogN)
+ *  - 힙붕괴 : N개의 자료를 extract하므로  O(NlogN)
+ * heap sort는 부가 메모리를 전혀 사용하지 않는다.
+ * @param arr
+ * @param compare
+ * @returns {*}
+ */
+exports.heap = function selection(arr, compare) {
+    var heap = new BinaryHeap(arr, compare);
+    var len = arr.length;
+    for (var i = 1; i <= len; i++) {
+        heap.insert(heap.get(i));
+    }
+
+    while (len > 1) {
+        heap.set(len--, heap.extract());
+    }
+
+    return arr; // or heap.getData();
+};
+
 /**
  * Quick sort (recursive version)
+ * Quick sort with O(NlogN) time complexity
  * 알고리즘
  * 1. 분할 알고리즘
  * - 왼쪽은 pivot 값보다 작은 값으로 오른쪽은 pivot 값보다 큰 값으로 배열한다.
@@ -508,5 +536,4 @@ function qsortSubfile(arr, left, right, compare) {
 
     return arr;
 };
-
 

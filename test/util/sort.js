@@ -186,4 +186,23 @@ describe('sort', function() {
         testArr = Sort.quickNRMedianOfThree(testArr, compare);
         testArr.should.eql(arrDescend);
     });
+
+    it('should heapsort with ascending.', function () {
+        var testArr = [];
+
+        testArr = _.shuffle(arrAscend);
+        testArr = Sort.heap(testArr);
+        testArr.should.eql(arrAscend);
+    });
+
+    it('should heapsort with comparator', function () {
+        var testArr = [];
+        var compare = function(a, b) {
+            return b - a;
+        }
+
+        testArr = _.shuffle(arrDescend);
+        testArr = Sort.heap(testArr, compare);
+        testArr.should.eql(arrDescend);
+    });
 });
