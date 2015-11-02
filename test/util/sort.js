@@ -7,7 +7,7 @@ describe('sort', function() {
     var arrDescend = null;
     beforeEach(function() {
         arrAscend = _.range(1, 16);
-        arrDescend =  _.range(16, 1);
+        arrDescend =  _.range(15, 0, -1);
     });
 
     afterEach(function() {
@@ -61,7 +61,7 @@ describe('sort', function() {
         var testArr = [];
 
         testArr = _.shuffle(arrAscend);
-        testArr = Sort.insertion(testArr, 0, testArr.length);
+        testArr = Sort.insertion2(testArr, 0, testArr.length);
         testArr.should.eql(arrAscend);
     });
 
@@ -72,7 +72,7 @@ describe('sort', function() {
         }
 
         testArr = _.shuffle(arrDescend);
-        testArr = Sort.insertion(testArr, 0, testArr.length, compare);
+        testArr = Sort.insertion2(testArr, 0, testArr.length, compare);
         testArr.should.eql(arrDescend);
     });
 

@@ -146,7 +146,7 @@ exports.bubble = function bubble(arr, compare) {
  * @param compare
  * @returns {*}
  */
-exports.bubble2 = function bubble(arr, compare) {
+exports.bubble2 = function bubble2(arr, compare) {
     var i,
         j,
         tmp,
@@ -188,11 +188,38 @@ var BinaryHeap = require('./binary-heap');
  * @param compare
  * @returns {*}
  */
-exports.heap = function selection(arr, compare) {
+exports.heap = function heap(arr, compare) {
     var heap = new BinaryHeap(arr, compare);
     var len = arr.length;
     for (var i = 1; i <= len; i++) {
         heap.insert(heap.get(i));
+    }
+
+    while (len > 1) {
+        heap.set(len--, heap.extract());
+    }
+
+    return arr; // or heap.getData();
+};
+
+/**
+ * heap sort 2
+ * insert, extract, down heap, up heap은 O(logN)의 성능을 가진다.
+ *  - Full Binary Tree :  노드가 N개이면 트리의 높이는 logN+1
+ * heap sort는 O(NlogN)의 성능을 가진다.
+ *  - 힙생성 : 기본 heap sort와 다르게 입력배열을 힙으로 가정하고 내부노드(N/2)에 대해서만 downheap하여 연산횟수를 반으로 줄인다.
+ *  - 힙붕괴 : N개의 자료를 extract하므로  O(NlogN)
+ * heap sort는 부가 메모리를 전혀 사용하지 않는다.
+ * @param arr
+ * @param compare
+ * @returns {*}
+ */
+exports.heap2 = function heap2(arr, compare) {
+    var heap = new BinaryHeap(arr, compare);
+    var len = arr.length;
+    heap.setLength(len);
+    for (var i = parseInt(len/2); i >= 1; i--) {
+        heap.downHeap(i);
     }
 
     while (len > 1) {
