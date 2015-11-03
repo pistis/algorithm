@@ -1,0 +1,18 @@
+{
+    "nonStandard": true,
+    "modules": "common",
+    "loose": ["es6.modules", "es6.classes"],
+    "blacklist": [
+        "es5.properties.mutators",
+        "regenerator"
+    ],
+    "optional": ["spec.protoToAssign"],
+    "env": {
+        "production": {
+            "optional": [
+                "minification.removeConsole",
+                "minification.removeDebugger"
+            ]
+        }
+    }
+}

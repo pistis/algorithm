@@ -25,7 +25,8 @@ exports.fibonacci = function fibonacci(n) {
  */
 exports.fibonacciNonRecursive = function fibonacci(n) {
     var r = 0,
-        a = b = 1;
+        a = 1,
+        b = 1;
     if(n === 1 || n === 2) {
         return 1;
     }
