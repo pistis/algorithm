@@ -22,6 +22,12 @@
 (function() {
     'use strict';
 
+    /**
+     * 기본 최소힙
+     * @param data
+     * @param compare
+     * @constructor
+     */
     function BinaryHeap(data, compare) {
         this.data = data || [];
         this.heapLen = 0;
@@ -54,6 +60,9 @@
     };
 
     BinaryHeap.prototype.extract = function() {
+        if (this.heapLen == 0) {
+            return null;
+        }
         var value = this.get(1);
         this.set(1, this.get(this.heapLen--));
         this.downHeap(1);
@@ -74,6 +83,9 @@
     };
 
     BinaryHeap.prototype.peek = function() {
+        if (this.heapLen == 0) {
+            return null;
+        }
         return this.get(1);
     };
 
