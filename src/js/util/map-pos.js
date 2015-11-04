@@ -1,6 +1,6 @@
 export class MapPos {
-    constructor() {
-        this.type = null;
-        this.pos = null;
+    constructor(key, index) {
+        this.key = key || null;
+        this.index = index != undefined ? index :  null;
     }
 }

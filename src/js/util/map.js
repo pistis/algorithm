@@ -1,6 +1,6 @@
 import {MapPos} from './map-pos.js';
 /**
- * 검색을 위한 추상 자료구조 클래스
+ * 검색을 위한 추상 자료구조 클래스(템플릿)
  */
 export class Map {
     constructor(size) {
