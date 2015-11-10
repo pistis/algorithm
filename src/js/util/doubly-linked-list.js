@@ -265,5 +265,15 @@
         return arr;
     };
 
+    DoublyLinkedList.prototype.toString = function() {
+        var str = '';
+
+        this.forEach(function(node){
+            str += JSON.stringify(node);
+        });
+
+        return str;
+    };
+
     module.exports = DoublyLinkedList;
 }());

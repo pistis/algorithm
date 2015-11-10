@@ -6,7 +6,7 @@
     'use strict';
 
     function Node(data) {
-        this.data = data || null;
+        this.data = (data != null && data != undefined) ? data : null;
         this.next = null;
         this.prev = null;
     }
