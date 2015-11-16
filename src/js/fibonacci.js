@@ -23,7 +23,7 @@ exports.fibonacci = function fibonacci(n) {
  * @param n
  * @returns {*}
  */
-exports.fibonacciNonRecursive = function fibonacci(n) {
+exports.fibonacciNonRecursive = function fibonacciNonRecursive(n) {
     var r = 0,
         a = 1,
         b = 1;
@@ -38,4 +38,17 @@ exports.fibonacciNonRecursive = function fibonacci(n) {
     }
 
     return r;
+}
+
+var memo = {0:1, 1:1};
+exports.fibonacciMem = function fibonacciMem(n) {
+    if(n === 0) {
+        return 0;
+    }
+    if (memo[n]) {
+        return memo[n];
+    }
+    var result = fibonacciMem(n - 1) + fibonacciMem(n - 2);
+    memo[n] = result;
+    return result;
 }
