@@ -110,7 +110,12 @@ function testSort(sortArr, n) {
     testResult.push(SimpleTimer.getExecutionTime());
 
     SimpleTimer.start();
-    _.sortBy(sortArr[6]);
+    Sort.merge(sortArr[6]);
+    SimpleTimer.end();
+    testResult.push(SimpleTimer.getExecutionTime());
+
+    SimpleTimer.start();
+    _.sortBy(sortArr[7]);
     SimpleTimer.end();
     testResult.push(SimpleTimer.getExecutionTime());
 
@@ -123,24 +128,24 @@ function testSort(sortArr, n) {
 function benchmark_sort_sorted() {
     console.log('========================================================================================');
     var resultTable = new Table({
-        head: ['sorted array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'underscore(sortBy)'],
-        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 20]
+        head: ['sorted array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'merge', 'underscore(sortBy)'],
+        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 18, 20]
     });
 
     var arr = _.range(1, 1001);
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 1000));
 
     var arr = _.range(1, 10001);
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 10000));
 
     var arr = _.range(1, 20001);
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 20000));
 
     var arr = _.range(1, 30001);
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 30000));
 
     console.log(resultTable.toString());
@@ -153,24 +158,24 @@ function benchmark_sort_sorted() {
 function benchmark_quicksort_random() {
     console.log('========================================================================================');
     var resultTable = new Table({
-        head: ['random array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'underscore(sortBy)'],
-        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 20]
+        head: ['random array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'merge', 'underscore(sortBy)'],
+        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 18, 20]
     });
 
     var arr = _.shuffle(_.range(1, 1001));
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 1000));
 
     var arr = _.shuffle(_.range(1, 10001));
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 10000));
 
     var arr = _.shuffle(_.range(1, 20001));
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 20000));
 
     var arr = _.shuffle(_.range(1, 30001));
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 30000));
 
     console.log(resultTable.toString());
@@ -183,24 +188,24 @@ function benchmark_quicksort_random() {
 function benchmark_quicksort_reverse() {
     console.log('========================================================================================');
     var resultTable = new Table({
-        head: ['reverse array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'underscore(sortBy)'],
-        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 20]
+        head: ['reverse array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'merge', 'underscore(sortBy)'],
+        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 18, 20]
     });
 
     var arr = _.range(1, 1001).slice().reverse();
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 1000));
 
     var arr = _.range(1, 10001).slice().reverse();
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 10000));
 
     var arr = _.range(1, 20001).slice().reverse();
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 20000));
 
     var arr = _.range(1, 30001).slice().reverse();
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 30000));
 
     console.log(resultTable.toString());

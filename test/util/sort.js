@@ -224,4 +224,22 @@ describe('sort', function() {
         testArr = Sort.heap2(testArr, compare);
         testArr.should.eql(arrDescend);
     });
+
+    it('should mergesort with ascending.', function () {
+        var testArr = [];
+
+        testArr = _.shuffle(arrAscend);
+        testArr = Sort.merge(testArr);
+        testArr.should.eql(arrAscend);
+    });
+
+    it('should mergesort with comparator', function () {
+        var testArr = [];
+        var compare = function(a, b) {
+            return b - a;
+        }
+        testArr = _.shuffle(arrDescend);
+        testArr = Sort.merge(testArr, compare);
+        testArr.should.eql(arrDescend);
+    });
 });

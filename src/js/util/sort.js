@@ -564,3 +564,38 @@ function qsortSubfile(arr, left, right, compare) {
     return arr;
 };
 
+exports.merge = function merge(arr, compare) {
+    if (arr.length < 2) {
+        return arr;
+    }
+    compare = compare || function(a, b) {
+            return a - b;
+        };
+    var middle = parseInt(arr.length / 2);
+    var left = arr.slice(0, middle);
+    var right = arr.slice(middle, arr.length);
+    return mergeSort(merge(left, compare), merge(right, compare), compare);
+};
+
+function mergeSort(left, right, compare) {
+    var result = [];
+
+    while(left.length && right.length) {
+        if (compare(right[0], left[0]) >= 0) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+
+    while(left.length) {
+        result.push(left.shift());
+    }
+
+    while(right.length) {
+        result.push(right.shift());
+    }
+
+    return result;
+}
+
