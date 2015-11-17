@@ -564,6 +564,21 @@ function qsortSubfile(arr, left, right, compare) {
     return arr;
 };
 
+/**
+ * 개념
+ * - 두개 이상의 정렬된 자료집합을 하나의 정렬된 자료집합으로 합치는 것
+ * - 하나의 병합단위를 런(run)이라고 함
+ * - 대상 자료집합이 정렬된 상태이므로 순차적으로 작은 자료를 뽑아서 놓으면 됨.
+ * 시간 복잡도 : T(N) = 2T(N/2) + N is O(NlogN)
+ * 특징
+ * - 입력 자료에 둔감함
+ * - 순차적인 접근만 사용하기 때문에 순차접근만 가능한 장치의 외부 정렬에 사용함
+ * - Random Access의 성능이 떨어지는 경우 효과적임
+ * - Stability가 있음
+ * @param arr
+ * @param compare
+ * @returns {*}
+ */
 exports.merge = function merge(arr, compare) {
     if (arr.length < 2) {
         return arr;
@@ -599,3 +614,46 @@ function mergeSort(left, right, compare) {
     return result;
 }
 
+/**
+ * merge와 동일
+ * - merge할때 매번 새로운 배열을 복사/생성하지 않는 방식
+ * -- 같은 사이즈의 배열 하나만 더 생성하여 바꿔가며 재사용
+ * - non-recursive 방식
+ */
+exports.merge2 = function merge2(arr, compare) {
+    if (arr.length < 2) {
+        return arr;
+    }
+    compare = compare || function(a, b) {
+            return a - b;
+        };
+    var from = arr, to = new Array(arr.length);
+    for (var blockSize = 1; blockSize < arr.length; blockSize *= 2) {
+        for (var start = 0; start < arr.length; start += 2 * blockSize) {
+            merge2Sort(from, to, start, start + blockSize, start + 2 * blockSize, compare);
+        }
+        // from과 to가 가리키는 배열의 참조 포인터를 변경한다.
+        var temp = from;
+        from = to;
+        to = temp;
+    }
+    if (arr !== from) { // 원래의 배열이 from과 같은 참조가 아니라면 from이 최종 정렬된 배열이며 이를 복사하여 반환한다.
+        for (var k = 0; k < arr.length; k++) {
+            arr[k] = from[k];
+        }
+    }
+
+    return arr;
+};
+
+function merge2Sort(from, to, lo, mid, hi, compare) {
+    if (mid > from.length) mid = from.length;
+    if (hi > from.length) hi = from.length;
+    var i = lo, j = mid;
+    for (var k = lo; k < hi; k++) {
+        if (i == mid)                               to[k] = from[j++];      // left영역이 소비됐을때
+        else if (j == hi)                           to[k] = from[i++];      // right영역이 소비됐을때
+        else if (compare(from[i], from[j]) >= 0 )   to[k] = from[j++];
+        else                                        to[k] = from[i++];
+    }
+}

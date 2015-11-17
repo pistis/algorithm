@@ -6,8 +6,8 @@ describe('sort', function() {
     var arrAscend = null;
     var arrDescend = null;
     beforeEach(function() {
-        arrAscend = _.range(1, 16);
-        arrDescend =  _.range(15, 0, -1);
+        arrAscend = _.range(1, 101);
+        arrDescend =  _.range(100, 0, -1);
     });
 
     afterEach(function() {
@@ -240,6 +240,24 @@ describe('sort', function() {
         }
         testArr = _.shuffle(arrDescend);
         testArr = Sort.merge(testArr, compare);
+        testArr.should.eql(arrDescend);
+    });
+
+    it('should mergesort2 with ascending.', function () {
+        var testArr = [];
+
+        testArr = _.shuffle(arrAscend);
+        testArr = Sort.merge2(testArr);
+        testArr.should.eql(arrAscend);
+    });
+
+    it('should mergesort2 with comparator', function () {
+        var testArr = [];
+        var compare = function(a, b) {
+            return b - a;
+        }
+        testArr = _.shuffle(arrDescend);
+        testArr = Sort.merge2(testArr, compare);
         testArr.should.eql(arrDescend);
     });
 });

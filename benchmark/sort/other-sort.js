@@ -3,52 +3,54 @@
  * - 참고로 C/C++, Java와는 컴퓨팅 파워가 떨어질 수 밖에 없는 스크립트 언어란 점을 감안...
  * 결과
  sorted array
- ┌──────────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────┬──────────────┬──────────┬──────────────┬────────────────────┐
- │ sorted array(length) │ selection(ms)    │ insertion(ms)    │ insertion 2(ms)  │ bubble(ms)   │ bubble 2(ms) │ heap     │ heap 2       │ underscore(sortBy) │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 1000                 │ 4                │ 0                │ 0                │ 3            │ 0            │ 9        │ 4            │ 2                  │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 10000                │ 601              │ 1                │ 1                │ 597          │ 0            │ 30       │ 10           │ 11                 │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 20000                │ 2178             │ 0                │ 1                │ 2132         │ 2            │ 49       │ 30           │ 9                  │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 30000                │ 5007             │ 1                │ 0                │ 4887         │ 0            │ 92       │ 30           │ 22                 │
- └──────────────────────┴──────────────────┴──────────────────┴──────────────────┴──────────────┴──────────────┴──────────┴──────────────┴────────────────────┘
+ ┌──────────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────┬──────────────┬──────────┬──────────────┬──────────────────┬──────────────────┬────────────────────┐
+ │ sorted array(length) │ selection(ms)    │ insertion(ms)    │ insertion 2(ms)  │ bubble(ms)   │ bubble 2(ms) │ heap     │ heap 2       │ merge            │ merge2           │ underscore(sortBy) │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 1000                 │ 4                │ 1                │ 0                │ 3            │ 1            │ 8        │ 5            │ 5                │ 1                │ 3                  │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 10000                │ 693              │ 1                │ 1                │ 684          │ 1            │ 33       │ 11           │ 27               │ 3                │ 8                  │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 20000                │ 2179             │ 1                │ 0                │ 2170         │ 2            │ 68       │ 28           │ 41               │ 6                │ 9                  │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 30000                │ 5313             │ 0                │ 1                │ 5099         │ 1            │ 112      │ 40           │ 73               │ 11               │ 15                 │
+ └──────────────────────┴──────────────────┴──────────────────┴──────────────────┴──────────────┴──────────────┴──────────┴──────────────┴──────────────────┴──────────────────┴────────────────────┘
 
  random array
- ┌──────────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────┬──────────────┬──────────┬──────────────┬────────────────────┐
- │ reverse array(lengt… │ selection(ms)    │ insertion(ms)    │ insertion 2(ms)  │ bubble(ms)   │ bubble 2(ms) │ heap     │ heap 2       │ underscore(sortBy) │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 1000                 │ 8                │ 7                │ 8                │ 9            │ 11           │ 6        │ 1            │ 0                  │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 10000                │ 574              │ 617              │ 665              │ 687          │ 738          │ 26       │ 8            │ 3                  │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 20000                │ 2174             │ 2704             │ 2672             │ 2742         │ 2812         │ 47       │ 15           │ 8                  │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 30000                │ 4895             │ 5619             │ 6318             │ 6067         │ 6111         │ 80       │ 23           │ 23                 │
- └──────────────────────┴──────────────────┴──────────────────┴──────────────────┴──────────────┴──────────────┴──────────┴──────────────┴────────────────────┘
+ ┌──────────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────┬──────────────┬──────────┬──────────────┬──────────────────┬──────────────────┬────────────────────┐
+ │ reverse array(lengt… │ selection(ms)    │ insertion(ms)    │ insertion 2(ms)  │ bubble(ms)   │ bubble 2(ms) │ heap     │ heap 2       │ merge            │ merge2           │ underscore(sortBy) │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 1000                 │ 6                │ 6                │ 7                │ 8            │ 8            │ 2        │ 1            │ 4                │ 1                │ 1                  │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 10000                │ 656              │ 701              │ 672              │ 780          │ 701          │ 23       │ 8            │ 61               │ 3                │ 2                  │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 20000                │ 2355             │ 2580             │ 2813             │ 2866         │ 2807         │ 81       │ 16           │ 115              │ 8                │ 11                 │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 30000                │ 5068             │ 5728             │ 5976             │ 6176         │ 6124         │ 74       │ 23           │ 173              │ 6                │ 13                 │
+ └──────────────────────┴──────────────────┴──────────────────┴──────────────────┴──────────────┴──────────────┴──────────┴──────────────┴──────────────────┴──────────────────┴────────────────────┘
 
  reverse array
- ┌──────────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────┬──────────────┬──────────┬──────────────┬────────────────────┐
- │ random array(length) │ selection(ms)    │ insertion(ms)    │ insertion 2(ms)  │ bubble(ms)   │ bubble 2(ms) │ heap     │ heap 2       │ underscore(sortBy) │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 1000                 │ 7                │ 3                │ 4                │ 7            │ 7            │ 8        │ 1            │ 0                  │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 10000                │ 543              │ 308              │ 306              │ 721          │ 744          │ 35       │ 8            │ 7                  │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 20000                │ 2208             │ 1273             │ 1372             │ 3013         │ 2872         │ 45       │ 16           │ 11                 │
- ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼────────────────────┤
- │ 30000                │ 5114             │ 3105             │ 3849             │ 9483         │ 8567         │ 92       │ 27           │ 21                 │
- └──────────────────────┴──────────────────┴──────────────────┴──────────────────┴──────────────┴──────────────┴──────────┴──────────────┴────────────────────┘
+ ┌──────────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────┬──────────────┬──────────┬──────────────┬──────────────────┬──────────────────┬────────────────────┐
+ │ random array(length) │ selection(ms)    │ insertion(ms)    │ insertion 2(ms)  │ bubble(ms)   │ bubble 2(ms) │ heap     │ heap 2       │ merge            │ merge2           │ underscore(sortBy) │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 1000                 │ 6                │ 3                │ 3                │ 8            │ 6            │ 3        │ 1            │ 5                │ 1                │ 1                  │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 10000                │ 585              │ 289              │ 326              │ 783          │ 975          │ 197      │ 27           │ 102              │ 5                │ 10                 │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 20000                │ 3342             │ 1394             │ 1409             │ 3627         │ 4331         │ 83       │ 24           │ 123              │ 8                │ 12                 │
+ ├──────────────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────┼──────────────┼──────────┼──────────────┼──────────────────┼──────────────────┼────────────────────┤
+ │ 30000                │ 6326             │ 3428             │ 3332             │ 7164         │ 7327         │ 99       │ 31           │ 177              │ 17               │ 24                 │
+ └──────────────────────┴──────────────────┴──────────────────┴──────────────────┴──────────────┴──────────────┴──────────┴──────────────┴──────────────────┴──────────────────┴────────────────────┘
 
 
  * 결론
  * selection : O(n^2)으로 느리다.
  * insertion or 2 : 정렬된 data에 대해선 빠르다. 일반적으로는 O(n^2)으로 느리다.
  * bubble : O(n^2)으로 느리다.
- * bubble 2 : 정렫된 data에 대해선 빠르다. O(n^2)으로 느리다.
+ * bubble 2 : 정렫된 data에 대해선 정말 빠르다. 일반적으로는 O(n^2)으로 느리다.
  * heap : 입력자료와 상관없이 일관된 성능을 보여준다. underscore보다는 느리지만 O(NlogN)의 성능으로 selection, insertion  bubble보다는 빠르다.(쓸만하다.)
  * heap 2 : heap과 동일하나, heap 생성시 내부노드 downheap 알고리즘 최적화로 인해 전체적으로 두배이상의 성능 향상이 있다.
+ * merge :
+ * merge2 :
  * underscore : 빠르다.
  */
 
@@ -115,7 +117,12 @@ function testSort(sortArr, n) {
     testResult.push(SimpleTimer.getExecutionTime());
 
     SimpleTimer.start();
-    _.sortBy(sortArr[7]);
+    Sort.merge2(sortArr[7]);
+    SimpleTimer.end();
+    testResult.push(SimpleTimer.getExecutionTime());
+
+    SimpleTimer.start();
+    _.sortBy(sortArr[8]);
     SimpleTimer.end();
     testResult.push(SimpleTimer.getExecutionTime());
 
@@ -128,24 +135,24 @@ function testSort(sortArr, n) {
 function benchmark_sort_sorted() {
     console.log('========================================================================================');
     var resultTable = new Table({
-        head: ['sorted array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'merge', 'underscore(sortBy)'],
-        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 18, 20]
+        head: ['sorted array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'merge', 'merge2', 'underscore(sortBy)'],
+        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 18, 18, 20]
     });
 
     var arr = _.range(1, 1001);
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 1000));
 
     var arr = _.range(1, 10001);
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 10000));
 
     var arr = _.range(1, 20001);
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 20000));
 
     var arr = _.range(1, 30001);
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 30000));
 
     console.log(resultTable.toString());
@@ -158,24 +165,24 @@ function benchmark_sort_sorted() {
 function benchmark_quicksort_random() {
     console.log('========================================================================================');
     var resultTable = new Table({
-        head: ['random array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'merge', 'underscore(sortBy)'],
-        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 18, 20]
+        head: ['random array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'merge', 'merge2', 'underscore(sortBy)'],
+        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 18, 18, 20]
     });
 
     var arr = _.shuffle(_.range(1, 1001));
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 1000));
 
     var arr = _.shuffle(_.range(1, 10001));
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 10000));
 
     var arr = _.shuffle(_.range(1, 20001));
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 20000));
 
     var arr = _.shuffle(_.range(1, 30001));
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 30000));
 
     console.log(resultTable.toString());
@@ -188,24 +195,24 @@ function benchmark_quicksort_random() {
 function benchmark_quicksort_reverse() {
     console.log('========================================================================================');
     var resultTable = new Table({
-        head: ['reverse array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'merge', 'underscore(sortBy)'],
-        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 18, 20]
+        head: ['reverse array(length)', 'selection(ms)', 'insertion(ms)', 'insertion 2(ms)', 'bubble(ms)', 'bubble 2(ms)', 'heap', 'heap 2', 'merge', 'merge2', 'underscore(sortBy)'],
+        colWidths: [22, 18, 18, 18, 14, 14, 10, 14, 18, 18, 20]
     });
 
     var arr = _.range(1, 1001).slice().reverse();
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 1000));
 
     var arr = _.range(1, 10001).slice().reverse();
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 10000));
 
     var arr = _.range(1, 20001).slice().reverse();
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 20000));
 
     var arr = _.range(1, 30001).slice().reverse();
-    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
+    var sortArr = [arr, arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice(), arr.slice()];
     resultTable.push(testSort(sortArr, 30000));
 
     console.log(resultTable.toString());
