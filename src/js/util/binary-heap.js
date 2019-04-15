@@ -66,6 +66,7 @@
         var value = this.get(1);
         this.set(1, this.get(this.heapLen--));
         this.downHeap(1);
+        this.data.pop()
         return value;
     };
 
